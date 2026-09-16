@@ -15,10 +15,19 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// Initialize database (async)
-(async () => {
-  await db.initDatabase();
-  console.log('Database ready, starting server...');
+let dbInitialized = false;
+app.use(async (req, res, next) => {
+  if (!dbInitialized) {
+    try {
+      await db.initDatabase();
+      dbInitialized = true;
+      console.log('Database ready...');
+    } catch (err) {
+      console.error('DB Init Error', err);
+    }
+  }
+  next();
+});
 
 // ─── Auth Routes ─────────────────────────────────────────
 
@@ -316,9 +325,11 @@ app.get('*', (req, res) => {
 
 // ─── Start Server ────────────────────────────────────────
 
-app.listen(PORT, () => {
-  console.log(`\n🚗 YCCE Smart Parking System running at http://localhost:${PORT}`);
-  console.log(`📊 Admin: admin@ycce.edu / admin123\n`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`\n🚗 YCCE Smart Parking System running at http://localhost:${PORT}`);
+    console.log(`📊 Admin: admin@ycce.edu / admin123\n`);
+  });
+}
 
-})(); // end async IIFE
+module.exports = app;

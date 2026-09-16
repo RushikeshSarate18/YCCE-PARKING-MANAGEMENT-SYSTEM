@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="YCCE Parking QR Scanner — Scan vehicle QR codes for entry and exit at campus gates.">
+  <title>QR Scanner — YCCE Smart Parking</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/index.html" class="nav-brand">
+        <div class="logo-icon">🅿️</div>
+        <span>YCCE <span class="text-gradient-orange">Parking</span></span>
+      </a>
+      <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">☰</button>
+      <div class="nav-links" id="auth-links"></div>
+    </div>
+  </nav>
+
+  <!-- Scanner -->
+  <div class="scanner-page">
+    <div class="container">
+      <div class="scanner-container">
+        <div style="text-align: center; margin-bottom: 28px;">
+          <h1>📷 QR <span class="text-gradient">Scanner</span></h1>
+          <p style="color: var(--text-secondary); margin-top: 8px;">Scan vehicle QR code at the gate</p>
+        </div>
+
+        <!-- Mode Toggle -->
+        <div class="scanner-mode-toggle" id="mode-toggle">
+          <button class="mode-btn active" onclick="setMode('entry')" id="mode-entry">
+            🚗 Entry Gate
+          </button>
+          <button class="mode-btn" onclick="setMode('exit')" id="mode-exit">
+            🚪 Exit Gate
+          </button>
+        </div>
+
+        <!-- Camera Scanner -->
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <div id="qr-reader" style="width: 100%;"></div>
+        </div>
+
+        <!-- Manual Input -->
+        <div class="card" style="margin-top: 20px;">
+          <div class="card-header">
+            <div class="card-title">⌨️ Manual QR Token Input</div>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 16px;">
+            If camera scanning doesn't work, paste the QR token manually
+          </p>
+          <div style="display: flex; gap: 12px;">
+            <input type="text" class="form-input" id="manual-token" placeholder="Paste QR token here..." style="flex: 1;">
+            <button class="btn btn-primary" onclick="processManualToken()" id="btn-manual-scan">
+              Scan
+            </button>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div class="card" id="scan-result-card" style="margin-top: 20px; display: none;">
+          <div id="scan-result"></div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-grid" style="margin-top: 24px;">
+          <div class="stat-card">
+            <div class="card-icon orange">🅰️</div>
+            <div>
+              <div class="stat-value" id="scan-stat-a">—</div>
+              <div class="stat-label">Zone A Free</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="card-icon blue">🅱️</div>
+            <div>
+              <div class="stat-value" id="scan-stat-b">—</div>
+              <div class="stat-label">Zone B Free</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="card-icon green">©️</div>
+            <div>
+              <div class="stat-value" id="scan-stat-c">—</div>
+              <div class="stat-label">Zone C Free</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/scan.js"></script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="YCCE Nagpur Smart Parking Management System — QR-based entry and exit, role-based zone restrictions, real-time availability.">
+  <title>YCCE Smart Parking — Yeshwantrao Chavan College of Engineering</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="/index.html" class="nav-brand">
+        <div class="logo-icon">🅿️</div>
+        <span>YCCE <span class="text-gradient-orange">Parking</span></span>
+      </a>
+      <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">☰</button>
+      <div class="nav-links" id="auth-links">
+        <a href="/login.html">Login</a>
+        <a href="/register.html" class="btn-nav">Register</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Live Parking Availability
+        </div>
+        <h1>
+          Smart Parking for<br>
+          <span class="text-gradient">YCCE Nagpur</span>
+        </h1>
+        <p>
+          Scan your QR code at the gate, get assigned a spot instantly. 
+          No more circling the lot — know exactly where to park before you arrive.
+        </p>
+        <div class="hero-buttons">
+          <a href="/register.html" class="btn btn-primary btn-lg" id="hero-register-btn">
+            🚀 Register Your Vehicle
+          </a>
+          <a href="/login.html" class="btn btn-secondary btn-lg" id="hero-login-btn">
+            🔑 Login
+          </a>
+        </div>
+
+        <div class="hero-stats" id="hero-stats">
+          <div>
+            <div class="hero-stat-value" id="stat-total">150</div>
+            <div class="hero-stat-label">Total Spots</div>
+          </div>
+          <div>
+            <div class="hero-stat-value" id="stat-available" style="color: var(--success);">—</div>
+            <div class="hero-stat-label">Available Now</div>
+          </div>
+          <div>
+            <div class="hero-stat-value" id="stat-occupied" style="color: var(--error);">—</div>
+            <div class="hero-stat-label">Occupied</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Decorative car SVG -->
+    <div class="hero-visual">
+      <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="200" r="180" stroke="rgba(249,115,22,0.2)" stroke-width="2" fill="none"/>
+        <circle cx="200" cy="200" r="140" stroke="rgba(59,130,246,0.15)" stroke-width="1.5" fill="none"/>
+        <circle cx="200" cy="200" r="100" stroke="rgba(249,115,22,0.1)" stroke-width="1" fill="none"/>
+        <text x="200" y="210" text-anchor="middle" font-size="80" fill="rgba(249,115,22,0.6)">🚗</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div style="text-align: center;" class="fade-in">
+        <h2>How It <span class="text-gradient">Works</span></h2>
+        <p style="color: var(--text-secondary); margin-top: 12px; font-size: 1.1rem;">Simple 4-step process to park your vehicle</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card fade-in">
+          <div class="step-number">1</div>
+          <div class="step-icon">📝</div>
+          <h4>Register</h4>
+          <p>Create your account and register your vehicle details</p>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-number">2</div>
+          <div class="step-icon">📱</div>
+          <h4>Get QR Code</h4>
+          <p>Receive a unique QR code for your registered vehicle</p>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-number">3</div>
+          <div class="step-icon">🔍</div>
+          <h4>Scan at Entry</h4>
+          <p>Scan QR at the gate — get assigned a parking spot instantly</p>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-number">4</div>
+          <div class="step-icon">🚗</div>
+          <h4>Scan at Exit</h4>
+          <p>Scan QR when leaving — spot is freed for others</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Parking Zones -->
+  <section class="section">
+    <div class="container">
+      <div style="text-align: center;" class="fade-in">
+        <h2>Parking <span class="text-gradient">Zones</span></h2>
+        <p style="color: var(--text-secondary); margin-top: 12px; font-size: 1.1rem;">Real-time availability across all campus zones</p>
+      </div>
+
+      <div class="zones-grid" id="zones-grid">
+        <!-- Zone A -->
+        <div class="zone-card zone-a fade-in">
+          <div class="zone-header">
+            <div>
+              <div class="zone-letter">Zone A</div>
+              <div style="color: var(--text-secondary); font-size: 0.9rem;">Near College Building</div>
+            </div>
+            <span class="badge badge-faculty">Faculty Only</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; color: var(--text-secondary); font-size: 0.9rem;">
+            <span>Available: <strong id="zone-a-available" style="color: var(--success);">—</strong></span>
+            <span>Total: <strong id="zone-a-total">20</strong></span>
+          </div>
+          <div class="zone-progress">
+            <div class="zone-progress-bar" id="zone-a-bar" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Zone B -->
+        <div class="zone-card zone-b fade-in">
+          <div class="zone-header">
+            <div>
+              <div class="zone-letter">Zone B</div>
+              <div style="color: var(--text-secondary); font-size: 0.9rem;">General Parking</div>
+            </div>
+            <span class="badge badge-student">Everyone</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; color: var(--text-secondary); font-size: 0.9rem;">
+            <span>Available: <strong id="zone-b-available" style="color: var(--success);">—</strong></span>
+            <span>Total: <strong id="zone-b-total">50</strong></span>
+          </div>
+          <div class="zone-progress">
+            <div class="zone-progress-bar" id="zone-b-bar" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Zone C -->
+        <div class="zone-card zone-c fade-in">
+          <div class="zone-header">
+            <div>
+              <div class="zone-letter">Zone C</div>
+              <div style="color: var(--text-secondary); font-size: 0.9rem;">Two-Wheeler Zone</div>
+            </div>
+            <span class="badge badge-student">Everyone</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; color: var(--text-secondary); font-size: 0.9rem;">
+            <span>Available: <strong id="zone-c-available" style="color: var(--success);">—</strong></span>
+            <span>Total: <strong id="zone-c-total">80</strong></span>
+          </div>
+          <div class="zone-progress">
+            <div class="zone-progress-bar" id="zone-c-bar" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Restriction Notice -->
+  <section class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="card fade-in" style="max-width: 800px; margin: 0 auto; text-align: center; border-color: rgba(239, 68, 68, 0.3);">
+        <div style="font-size: 3rem; margin-bottom: 16px;">⚠️</div>
+        <h3 style="color: var(--error); margin-bottom: 12px;">Parking Restriction Notice</h3>
+        <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8;">
+          <strong>Zone A (Near College Building)</strong> is strictly reserved for 
+          <strong style="color: #a78bfa;">Faculty</strong> and 
+          <strong style="color: var(--primary);">Higher Authority</strong> only.<br>
+          Students are <strong style="color: var(--error);">NOT allowed</strong> to park their vehicles near the college building.
+          Students will be automatically assigned spots in <strong>Zone B</strong> or <strong>Zone C</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 YCCE Smart Parking System — Yeshwantrao Chavan College of Engineering, Nagpur</p>
+      <p style="margin-top: 8px;">Built with ❤️ for YCCE Campus</p>
+    </div>
+  </footer>
+
+  <script src="/js/api.js"></script>
+  <script>
+    // Load parking status
+    async function loadParkingStatus() {
+      try {
+        const status = await apiRequest('/api/parking/status');
+        
+        const totalAvailable = status.A.available + status.B.available + status.C.available;
+        const totalOccupied = status.A.occupied + status.B.occupied + status.C.occupied;
+        
+        document.getElementById('stat-available').textContent = totalAvailable;
+        document.getElementById('stat-occupied').textContent = totalOccupied;
+
+        // Zone A
+        document.getElementById('zone-a-available').textContent = status.A.available;
+        document.getElementById('zone-a-total').textContent = status.A.total;
+        const aPercent = (status.A.occupied / status.A.total) * 100;
+        document.getElementById('zone-a-bar').style.width = aPercent + '%';
+
+        // Zone B
+        document.getElementById('zone-b-available').textContent = status.B.available;
+        document.getElementById('zone-b-total').textContent = status.B.total;
+        const bPercent = (status.B.occupied / status.B.total) * 100;
+        document.getElementById('zone-b-bar').style.width = bPercent + '%';
+
+        // Zone C
+        document.getElementById('zone-c-available').textContent = status.C.available;
+        document.getElementById('zone-c-total').textContent = status.C.total;
+        const cPercent = (status.C.occupied / status.C.total) * 100;
+        document.getElementById('zone-c-bar').style.width = cPercent + '%';
+
+      } catch (err) {
+        console.log('Could not load parking status:', err.message);
+      }
+    }
+
+    // If logged in, update hero buttons
+    const user = getUser();
+    if (user) {
+      document.getElementById('hero-register-btn').href = '/dashboard.html';
+      document.getElementById('hero-register-btn').innerHTML = '📊 Go to Dashboard';
+      document.getElementById('hero-login-btn').href = '/dashboard.html';
+      document.getElementById('hero-login-btn').innerHTML = '📱 View My QR Code';
+    }
+
+    loadParkingStatus();
+    setInterval(loadParkingStatus, 30000); // Refresh every 30s
+  </script>
+</body>
+</html>

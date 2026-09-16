@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="YCCE Parking Dashboard — View your QR code, parking status, and history.">
+  <title>Dashboard — YCCE Smart Parking</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/index.html" class="nav-brand">
+        <div class="logo-icon">🅿️</div>
+        <span>YCCE <span class="text-gradient-orange">Parking</span></span>
+      </a>
+      <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">☰</button>
+      <div class="nav-links" id="auth-links"></div>
+    </div>
+  </nav>
+
+  <!-- Dashboard -->
+  <div class="dashboard-page">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="dashboard-header">
+        <div>
+          <h1 id="dashboard-greeting">Welcome 👋</h1>
+          <p style="color: var(--text-secondary); margin-top: 4px;" id="dashboard-subtitle">Your parking dashboard</p>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <a href="/scan.html" class="btn btn-accent">📷 Scanner</a>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-card">
+          <div class="card-icon orange">🅿️</div>
+          <div>
+            <div class="stat-value" id="stat-zone-a">—</div>
+            <div class="stat-label">Zone A Available</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="card-icon blue">🅿️</div>
+          <div>
+            <div class="stat-value" id="stat-zone-b">—</div>
+            <div class="stat-label">Zone B Available</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="card-icon green">🅿️</div>
+          <div>
+            <div class="stat-value" id="stat-zone-c">—</div>
+            <div class="stat-label">Zone C Available</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="card-icon purple">📊</div>
+          <div>
+            <div class="stat-value" id="stat-total-available">—</div>
+            <div class="stat-label">Total Available</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Grid -->
+      <div class="dashboard-grid">
+
+        <!-- QR Code -->
+        <div class="card" id="qr-card">
+          <div class="card-header">
+            <div class="card-title">📱 Your QR Code</div>
+            <button class="btn btn-sm btn-secondary" onclick="downloadQR()" id="btn-download-qr">
+              ⬇️ Download
+            </button>
+          </div>
+          <div class="qr-display" id="qr-display">
+            <div class="spinner"></div>
+            <p style="color: var(--text-muted);">Loading QR code...</p>
+          </div>
+        </div>
+
+        <!-- Current Parking Status -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">🚗 Current Status</div>
+          </div>
+          <div id="parking-status-container">
+            <div class="current-parking" id="current-parking">
+              <div style="font-size: 3rem; margin-bottom: 12px;">🏠</div>
+              <h3 style="color: var(--success);">Not Currently Parked</h3>
+              <p style="color: var(--text-secondary); margin-top: 8px;">Scan your QR at the entry gate to park</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vehicle Info -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">🏍️ Vehicle Details</div>
+          </div>
+          <div id="vehicle-info">
+            <div class="spinner"></div>
+          </div>
+        </div>
+
+        <!-- Profile -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">👤 Profile</div>
+          </div>
+          <div id="profile-info">
+            <div class="spinner"></div>
+          </div>
+        </div>
+
+        <!-- Parking History -->
+        <div class="card full-width">
+          <div class="card-header">
+            <div class="card-title">📜 Parking History</div>
+          </div>
+          <div id="history-container">
+            <div class="spinner"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "ycce-smart-parking",
+  "version": "1.0.0",
+  "description": "Smart Parking Management System for YCCE Nagpur",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "sql.js": "^1.10.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "qrcode": "^1.5.3",
+    "uuid": "^9.0.0"
+  }
+}

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Register your vehicle for YCCE Smart Parking System. Get a QR code for seamless entry and exit.">
+  <title>Register — YCCE Smart Parking</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/index.html" class="nav-brand">
+        <div class="logo-icon">🅿️</div>
+        <span>YCCE <span class="text-gradient-orange">Parking</span></span>
+      </a>
+      <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">☰</button>
+      <div class="nav-links" id="auth-links">
+        <a href="/login.html">Login</a>
+        <a href="/register.html" class="btn-nav">Register</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Registration Form -->
+  <div class="auth-page">
+    <div class="auth-container" style="max-width: 640px;">
+      <div class="auth-header">
+        <h1>🚗 Register Your <span class="text-gradient">Vehicle</span></h1>
+        <p>Create your account and get your QR code</p>
+      </div>
+
+      <!-- Step Indicators -->
+      <div class="form-steps">
+        <div class="form-step-indicator">
+          <div class="form-step-dot active" id="dot-1">1</div>
+          <div class="form-step-line" id="line-1"></div>
+          <div class="form-step-dot" id="dot-2">2</div>
+          <div class="form-step-line" id="line-2"></div>
+          <div class="form-step-dot" id="dot-3">3</div>
+        </div>
+      </div>
+
+      <div id="alert-container"></div>
+
+      <div class="auth-card">
+        <form id="register-form" onsubmit="return false;">
+
+          <!-- Step 1: Role & Personal Info -->
+          <div class="form-panel active" id="step-1">
+            <h3 style="margin-bottom: 24px;">👤 Personal Information</h3>
+
+            <div class="form-group">
+              <label class="form-label">I am a...</label>
+              <div class="role-selector">
+                <div class="role-option">
+                  <input type="radio" name="role" id="role-student" value="student" checked>
+                  <label for="role-student">
+                    <span class="role-icon">🎓</span>
+                    <span class="role-name">Student</span>
+                    <span class="role-desc">Zone B & C</span>
+                  </label>
+                </div>
+                <div class="role-option">
+                  <input type="radio" name="role" id="role-faculty" value="faculty">
+                  <label for="role-faculty">
+                    <span class="role-icon">👨‍🏫</span>
+                    <span class="role-name">Faculty</span>
+                    <span class="role-desc">All Zones</span>
+                  </label>
+                </div>
+                <div class="role-option">
+                  <input type="radio" name="role" id="role-authority" value="authority">
+                  <label for="role-authority">
+                    <span class="role-icon">🏛️</span>
+                    <span class="role-name">Authority</span>
+                    <span class="role-desc">All Zones</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="reg-name">Full Name *</label>
+                <input type="text" class="form-input" id="reg-name" placeholder="Rushikesh Sharma" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="reg-email">Email Address *</label>
+                <input type="email" class="form-input" id="reg-email" placeholder="name@ycce.edu" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="reg-phone">Phone Number</label>
+                <input type="tel" class="form-input" id="reg-phone" placeholder="+91 98765 43210">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="reg-department">Department</label>
+                <select class="form-input" id="reg-department">
+                  <option value="">Select Department</option>
+                  <option value="Computer Science">Computer Science</option>
+                  <option value="Information Technology">Information Technology</option>
+                  <option value="Electronics">Electronics & Telecomm</option>
+                  <option value="Mechanical">Mechanical Engineering</option>
+                  <option value="Civil">Civil Engineering</option>
+                  <option value="Electrical">Electrical Engineering</option>
+                  <option value="AI & DS">AI & Data Science</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="reg-password">Password *</label>
+                <input type="password" class="form-input" id="reg-password" placeholder="Min 6 characters" required minlength="6">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="reg-confirm-password">Confirm Password *</label>
+                <input type="password" class="form-input" id="reg-confirm-password" placeholder="Re-enter password" required>
+              </div>
+            </div>
+
+            <div class="form-nav">
+              <div></div>
+              <button type="button" class="btn btn-primary" onclick="goToStep(2)" id="btn-next-1">
+                Next: Vehicle Details →
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Vehicle Details -->
+          <div class="form-panel" id="step-2">
+            <h3 style="margin-bottom: 24px;">🏍️ Vehicle Information</h3>
+
+            <div class="form-group">
+              <label class="form-label">Vehicle Type *</label>
+              <div class="vehicle-selector">
+                <div class="vehicle-option">
+                  <input type="radio" name="vehicleType" id="vtype-two" value="two-wheeler" checked>
+                  <label for="vtype-two">
+                    <span class="vehicle-icon">🏍️</span>
+                    <span>Two-Wheeler</span>
+                  </label>
+                </div>
+                <div class="vehicle-option">
+                  <input type="radio" name="vehicleType" id="vtype-four" value="four-wheeler">
+                  <label for="vtype-four">
+                    <span class="vehicle-icon">🚗</span>
+                    <span>Four-Wheeler</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="reg-vehicle-number">Vehicle Number *</label>
+                <input type="text" class="form-input" id="reg-vehicle-number" placeholder="MH31 XX 1234" required style="text-transform: uppercase;">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="reg-vehicle-model">Vehicle Model</label>
+                <input type="text" class="form-input" id="reg-vehicle-model" placeholder="Honda Activa / Maruti Swift">
+              </div>
+            </div>
+
+            <div class="form-nav">
+              <button type="button" class="btn btn-secondary" onclick="goToStep(1)">
+                ← Back
+              </button>
+              <button type="button" class="btn btn-primary" onclick="goToStep(3)" id="btn-next-2">
+                Next: Review →
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Review & Submit -->
+          <div class="form-panel" id="step-3">
+            <h3 style="margin-bottom: 24px;">✅ Review & Confirm</h3>
+
+            <div class="card" style="margin-bottom: 20px; padding: 20px;">
+              <h4 style="margin-bottom: 16px; color: var(--text-secondary);">Personal Details</h4>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Name</div>
+                  <div id="review-name" style="font-weight: 600;">—</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Email</div>
+                  <div id="review-email" style="font-weight: 600;">—</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Role</div>
+                  <div id="review-role">—</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Department</div>
+                  <div id="review-department" style="font-weight: 600;">—</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 20px; padding: 20px;">
+              <h4 style="margin-bottom: 16px; color: var(--text-secondary);">Vehicle Details</h4>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Type</div>
+                  <div id="review-vehicle-type" style="font-weight: 600;">—</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Number</div>
+                  <div id="review-vehicle-number" style="font-weight: 600;">—</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Model</div>
+                  <div id="review-vehicle-model" style="font-weight: 600;">—</div>
+                </div>
+                <div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Allowed Zones</div>
+                  <div id="review-zones" style="font-weight: 600;">—</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-nav">
+              <button type="button" class="btn btn-secondary" onclick="goToStep(2)">
+                ← Back
+              </button>
+              <button type="button" class="btn btn-primary btn-lg" onclick="submitRegistration()" id="btn-submit">
+                🚀 Complete Registration
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="auth-footer">
+        Already registered? <a href="/login.html">Login here</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/register.js"></script>
+</body>
+</html>

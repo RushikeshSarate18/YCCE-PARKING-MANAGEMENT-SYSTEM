@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login to YCCE Smart Parking System to access your dashboard and QR code.">
+  <title>Login — YCCE Smart Parking</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/index.html" class="nav-brand">
+        <div class="logo-icon">🅿️</div>
+        <span>YCCE <span class="text-gradient-orange">Parking</span></span>
+      </a>
+      <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">☰</button>
+      <div class="nav-links" id="auth-links">
+        <a href="/login.html">Login</a>
+        <a href="/register.html" class="btn-nav">Register</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Login Form -->
+  <div class="auth-page">
+    <div class="auth-container" style="max-width: 460px;">
+      <div class="auth-header">
+        <h1>🔑 Welcome <span class="text-gradient">Back</span></h1>
+        <p>Login to access your parking dashboard</p>
+      </div>
+
+      <div id="alert-container"></div>
+
+      <div class="auth-card">
+        <form id="login-form" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label class="form-label" for="login-email">Email Address</label>
+            <input type="email" class="form-input" id="login-email" placeholder="name@ycce.edu" required autofocus>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login-password">Password</label>
+            <input type="password" class="form-input" id="login-password" placeholder="Enter your password" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 8px;" id="btn-login">
+            🔓 Login
+          </button>
+        </form>
+
+        <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--glass-border);">
+          <p style="color: var(--text-muted); font-size: 0.85rem; text-align: center;">
+            <strong>Admin?</strong> Use <code style="background: var(--glass); padding: 2px 8px; border-radius: 4px;">admin@ycce.edu</code> / <code style="background: var(--glass); padding: 2px 8px; border-radius: 4px;">admin123</code>
+          </p>
+        </div>
+      </div>
+
+      <div class="auth-footer">
+        Don't have an account? <a href="/register.html">Register here</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/login.js"></script>
+</body>
+</html>

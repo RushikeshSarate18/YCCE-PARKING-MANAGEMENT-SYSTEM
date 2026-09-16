@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="YCCE Parking Admin Panel — Manage parking spots, view occupancy, and monitor campus parking.">
+  <title>Admin Panel — YCCE Smart Parking</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/index.html" class="nav-brand">
+        <div class="logo-icon">🅿️</div>
+        <span>YCCE <span class="text-gradient-orange">Parking</span></span>
+      </a>
+      <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">☰</button>
+      <div class="nav-links" id="auth-links"></div>
+    </div>
+  </nav>
+
+  <!-- Admin Dashboard -->
+  <div class="admin-page">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="dashboard-header">
+        <div>
+          <h1>🛡️ Admin <span class="text-gradient">Panel</span></h1>
+          <p style="color: var(--text-secondary);">Manage all parking operations</p>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <a href="/scan.html" class="btn btn-accent">📷 Scanner</a>
+          <button class="btn btn-danger" onclick="resetAllSpots()" id="btn-reset">
+            🔄 Reset All Spots
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid" id="admin-stats">
+        <div class="stat-card">
+          <div class="card-icon orange">🅰️</div>
+          <div>
+            <div class="stat-value" id="admin-zone-a">—</div>
+            <div class="stat-label">Zone A (Faculty)</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="card-icon blue">🅱️</div>
+          <div>
+            <div class="stat-value" id="admin-zone-b">—</div>
+            <div class="stat-label">Zone B (General)</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="card-icon green">©️</div>
+          <div>
+            <div class="stat-value" id="admin-zone-c">—</div>
+            <div class="stat-label">Zone C (2-Wheeler)</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="card-icon purple">📊</div>
+          <div>
+            <div class="stat-value" id="admin-total">—</div>
+            <div class="stat-label">Total Occupied</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="admin-tabs" style="margin-top: 28px;">
+        <button class="admin-tab active" onclick="switchTab('spots')" id="tab-spots">🅿️ Parking Grid</button>
+        <button class="admin-tab" onclick="switchTab('active')" id="tab-active">🚗 Active Parking</button>
+        <button class="admin-tab" onclick="switchTab('logs')" id="tab-logs">📜 History</button>
+      </div>
+
+      <!-- Parking Grid Tab -->
+      <div class="admin-tab-content active" id="content-spots">
+        <div id="parking-grid-container">
+          <div class="spinner"></div>
+        </div>
+      </div>
+
+      <!-- Active Parking Tab -->
+      <div class="admin-tab-content" id="content-active">
+        <div class="card">
+          <div id="active-parking-container">
+            <div class="spinner"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- History Tab -->
+      <div class="admin-tab-content" id="content-logs">
+        <div class="card">
+          <div id="logs-container">
+            <div class="spinner"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

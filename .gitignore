@@ -1,0 +1,4 @@
+node_modules/
+parking.db
+.env
+.DS_Store
